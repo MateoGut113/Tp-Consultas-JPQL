@@ -1,5 +1,5 @@
 # Trabajo Practico Consultas JPQL
-Dado el modelo de clases de entidad trabajado en clases y disponible en:
+Dado el modelo de clases de entidad trabajado en clases:
 
 ## Realizar las siguientes consultas JPQL
 ### Ejercicio 1: Listar todos los clientes
