@@ -256,10 +256,42 @@ public class Main {
             System.out.println("\nConsulta 7:");
 
             System.out.println("\nConsulta 8:");
+                Long idFactura = factura.getId(); // factura creada antes
+                String consulta8 = """
+                        SELECT fd.articulo 
+                        FROM FacturaDetalle fd 
+                        WHERE fd.factura.id = :idFactura 
+                        ORDER BY fd.articulo.precioVenta DESC
+                    """;
+    
+                Articulo articuloMasCaro = em.createQuery(consulta8, Articulo.class)
+                        .setParameter("idFactura", idFactura)
+                        .setMaxResults(1)
+                        .getSingleResult();// un unico resultad
 
+                System.out.println("El artículo más caro en la factura con ID " +idFactura + " es :  "
+                    +articuloMasCaro.getDenominacion()+ " con precio :  $" +articuloMasCaro.getPrecioVenta());
+
+            
             System.out.println("\nConsulta 9:");
+                String consulta9 = "SELECT COUNT(f) FROM Factura f";
+                Long totalFacturas = em.createQuery(consulta9, Long.class).getSingleResult();
 
+                System.out.println("Cantidad tot de facturas:  " +totalFacturas);
+            
+            
             System.out.println("\nConsulta 10:");
+                double valorMin = 200;
+                String consulta10 = "SELECT f FROM Factura f WHERE f.total > :valor";
+                List<Factura> facturasMayores = em.createQuery(consulta10, Factura.class)
+                        .setParameter("valor", valorMin)
+                        .getResultList();
+
+               System.out.println("Facturas con total mayor a " +valorMin+ "--> :  ");
+                for (Factura f : facturasMayores) {
+                    System.out.println(" Factura ID: " + f.getId() + " total: $ " + f.getTotal());
+                }
+
 
             System.out.println("\nConsulta 11:");
 
