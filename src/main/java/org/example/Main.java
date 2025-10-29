@@ -197,7 +197,7 @@ public class Main {
             query.setParameter("id", 3L);
             ArticuloManufacturado articuloManufacturadoCon = (ArticuloManufacturado) query.getSingleResult();
 
-            System.out.println("Artículo manufacturado: " + articuloManufacturado.getDenominacion());
+            System.out.println("\nArtículo manufacturado: " + articuloManufacturado.getDenominacion());
             System.out.println("Descripción: " + articuloManufacturado.getDescripcion());
             System.out.println("Tiempo estimado: " + articuloManufacturado.getTiempoEstimadoMinutos() + " minutos");
             System.out.println("Preparación: " + articuloManufacturado.getPreparacion());
@@ -234,6 +234,41 @@ public class Main {
                     .setMaxResults(1)
                     .getSingleResult();
             System.out.println("El cliente mas facturado es: "+ clienteMasFacturado);
+
+            System.out.println("\nConsulta 4:");
+            String consult4 = """
+                SELECT fd.articulo, SUM(fd.cantidad) AS totalVendido
+                   FROM FacturaDetalle fd
+                   GROUP BY fd.articulo
+                   ORDER BY totalVendido DESC
+                """;
+            List<Object[]> resultados = em.createQuery(consult4, Object[].class).getResultList();
+            for (Object[] fila : resultados) {
+                Articulo articulo = (Articulo) fila[0];
+                double totalVendido = (double) fila[1];
+                System.out.println("Producto: " + articulo.getDenominacion() + " - Total vendido: " + totalVendido);
+            }
+
+            System.out.println("\nConsulta 5:");
+
+            System.out.println("\nConsulta 6:");
+
+            System.out.println("\nConsulta 7:");
+
+            System.out.println("\nConsulta 8:");
+
+            System.out.println("\nConsulta 9:");
+
+            System.out.println("\nConsulta 10:");
+
+            System.out.println("\nConsulta 11:");
+
+            System.out.println("\nConsulta 12:");
+
+            System.out.println("\nConsulta 13:");
+
+            System.out.println("\nConsulta 14:");
+
 
             // Cerrar el EntityManager y el EntityManagerFactory
             em.close();
