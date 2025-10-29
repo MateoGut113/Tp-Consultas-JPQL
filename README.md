@@ -14,8 +14,7 @@ Escribe una consulta para obtener el cliente que ha emitido más facturas.
 Pista: Deberá usar GROUP BY, COUNT, ORDER BY
 
 ### Ejercicio 4: Listar los artículos más vendidos
-Crea una consulta que devuelva los productos más vendidos, ordenados por la
-cantidad total vendida.
+Crea una consulta que devuelva los productos más vendidos, ordenados por la cantidad total vendida.\
 Pista: Deberá usar SUM, GROUP BY Y JOIN para unir FacturaDetalle y Artículo
 
 ### Ejercicio 5: Consultar las facturas emitidas en los 3 últimos meses de un cliente específico
