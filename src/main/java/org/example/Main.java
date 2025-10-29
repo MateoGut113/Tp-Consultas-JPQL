@@ -250,10 +250,35 @@ public class Main {
             }
 
             System.out.println("\nConsulta 5:");
+             String consult5 = "SELECT f FROM Factura f WHERE f.cliente.id = :idCliente AND f.fechaComprobante >= :fechaLimite";
+
+            List<Factura> facturasCliente = em.createQuery(consult5, Factura.class)
+                    .setParameter("idCliente", 2L)
+                    .setParameter("fechaLimite", LocalDate.now().minusMonths(3))
+                    .getResultList();
+
+            for (Factura f : facturasCliente) {
+                System.out.println("\nFactura N° " + f.getNroComprobante() + " - Fecha: " + f.getFechaComprobante());
+
+            }
 
             System.out.println("\nConsulta 6:");
+             String consult6 = "SELECT SUM(f.total) FROM Factura f WHERE f.cliente.id = :idCliente";
+            Double totalFacturado = em.createQuery(consult6, Double.class)
+                    .setParameter("idCliente", 3L)
+                    .getSingleResult();
+
+            System.out.println("Total facturado por el cliente 2: $" + totalFacturado);
 
             System.out.println("\nConsulta 7:");
+             String consult7 = "SELECT fd.articulo FROM FacturaDetalle fd WHERE fd.factura.id = :idFactura";
+            List<Articulo> articulosFactura = em.createQuery(consult7, Articulo.class)
+                    .setParameter("idFactura", 3L)
+                    .getResultList();
+
+            for (Articulo art : articulosFactura) {
+                System.out.println("Artículo vendido: " + art.getDenominacion());
+            }
 
             System.out.println("\nConsulta 8:");
                 Long idFactura = factura.getId(); // factura creada antes
