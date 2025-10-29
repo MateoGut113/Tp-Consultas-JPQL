@@ -10,7 +10,7 @@ Escribe una consulta para obtener todas las facturas emitidas en el último mes 
 de la fecha actual.
 
 ### Ejercicio 3: Obtener el cliente que ha generado más facturas
-Escribe una consulta para obtener el cliente que ha emitido más facturas.
+Escribe una consulta para obtener el cliente que ha emitido más facturas.\
 Pista: Deberá usar GROUP BY, COUNT, ORDER BY
 
 ### Ejercicio 4: Listar los artículos más vendidos
