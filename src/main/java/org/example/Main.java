@@ -339,7 +339,7 @@ public class Main {
                         + " - Fecha: " + f.getFechaComprobante());
             }
             System.out.println("\nConsulta 12:");
-            String patronCodigo = "%71%"; // patrón de búsqueda: % = cualquier secuencia de caracteres
+            String patronCodigo = "%71%"; // si pongo %n-random%, me hace las busqueda de los numeros que ponga en cualquier lugar
 
             String consulta12 = """
                 SELECT a
