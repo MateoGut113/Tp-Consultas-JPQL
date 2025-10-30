@@ -357,7 +357,45 @@ public class Main {
             }
             System.out.println("\nConsulta 13:");
 
+            String consulta13 = """
+    SELECT a
+    FROM Articulo a
+    WHERE a.precioVenta > (
+        SELECT AVG(a2.precioVenta)
+        FROM Articulo a2
+    )
+""";
+
+            List<Articulo> articulosSobrePromedio = em.createQuery(consulta13, Articulo.class)
+                    .getResultList();
+
+            System.out.println("Artículos con precio mayor al promedio de todos los artículos:");
+            for (Articulo a : articulosSobrePromedio) {
+                System.out.println("ID: " + a.getId() + " - " + a.getDenominacion() + " - Precio: $" + a.getPrecioVenta());
+            }
+
+
             System.out.println("\nConsulta 14:");
+
+            String consulta14 = """
+    SELECT c
+    FROM Categoria c
+    WHERE EXISTS (
+        SELECT a
+        FROM Articulo a
+        WHERE a MEMBER OF c.articulos
+    )
+""";
+
+            List<Categoria> categoriasConArticulos = em.createQuery(consulta14, Categoria.class)
+                    .getResultList();
+
+            System.out.println("Categorías que tienen artículos asociados:");
+            for (Categoria c : categoriasConArticulos) {
+                System.out.println("Categoría: " + c.getDenominacion());
+            }
+
+
 
 
             // Cerrar el EntityManager y el EntityManagerFactory
