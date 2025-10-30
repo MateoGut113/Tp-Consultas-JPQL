@@ -319,9 +319,42 @@ public class Main {
 
 
             System.out.println("\nConsulta 11:");
+            String nombreArticulo = "Manzana"; // nombre articulo que quiero buscar
 
+            String consulta11 = """
+                SELECT DISTINCT f
+                FROM Factura f
+                JOIN f.detallesFactura fd
+                WHERE fd.articulo.denominacion = :nombreArticulo
+            """;
+
+            List<Factura> facturasConArticulo = em.createQuery(consulta11, Factura.class)
+                    .setParameter("nombreArticulo", nombreArticulo)
+                    .getResultList();
+
+            System.out.println("Facturas que incluyen el artículo '" + nombreArticulo + "':");
+            for (Factura f : facturasConArticulo) {
+                System.out.println("Factura ID: " + f.getId()
+                        + " - N° comprobante: " + f.getNroComprobante()
+                        + " - Fecha: " + f.getFechaComprobante());
+            }
             System.out.println("\nConsulta 12:");
+            String patronCodigo = "%71%"; // patrón de búsqueda: % = cualquier secuencia de caracteres
 
+            String consulta12 = """
+                SELECT a
+                FROM Articulo a
+                WHERE a.codigo LIKE :patron
+            """;
+
+            List<Articulo> articulosCoincidentes = em.createQuery(consulta12, Articulo.class)
+                    .setParameter("patron", patronCodigo)
+                    .getResultList();
+
+            System.out.println("Artículos cuyo código coincide total o parcialmente con '" + patronCodigo + "':");
+            for (Articulo a : articulosCoincidentes) {
+                System.out.println("ID: " + a.getId() + " - Código: " + a.getCodigo() + " - Denominación: " + a.getDenominacion());
+            }
             System.out.println("\nConsulta 13:");
 
             System.out.println("\nConsulta 14:");
